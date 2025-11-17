@@ -20,7 +20,7 @@ class SEOResponse(BaseModel):
     keywords: List[str]
     raw: str
 
-@app.get("/seo/generate/product")
+@app.post("/seo/generate/product")
 def test(req: SEORequest):
     promt = f"""
         <|system|>
