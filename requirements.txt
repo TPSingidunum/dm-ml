@@ -5,3 +5,6 @@ transformers
 accelerate
 huggingface_hub
 hf_xet
+pymysql
+python-dotenv
+cryptography

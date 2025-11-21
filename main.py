@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 from transformers import pipeline
 import json
+from recomendations import recommendation_engine
 
 app =  FastAPI(title="DM-DML")
 
@@ -75,6 +76,16 @@ def test(req: SEORequest):
         final[validKeys[i]] = jsonResponse[tempKeys[i]]
 
     return final
+
+@app.get("/recommendations/{product_id}")
+def get_recommendations(product_id: int, limit: int = 5):
+    try:
+        recommendations = recommendation_engine.get_recommendations(product_id, limit)
+        return recommendations
+    except Exception as e:
+        # Return empty list on error to prevent frontend issues
+        print(f"Error in recommendations endpoint: {e}")
+        return []
 
 
 if __name__ == "__main__":
